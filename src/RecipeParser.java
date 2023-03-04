@@ -24,7 +24,6 @@ public class RecipeParser  {
 
 	public void jsonToArray(File f) {
 		JsonObject recipe = new JsonObject();
-		
 		try {
 			
 		}

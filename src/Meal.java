@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 /*EzeayPeazy Meal
  * DEV @ Seth Glover 
- * DESCRIPTION 
+ * DESCRIPTION This might not be needed but I am leaving this here for now. 
  * DATE
  */
 public class Meal implements Comparable <Meal> {

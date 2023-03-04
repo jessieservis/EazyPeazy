@@ -70,6 +70,10 @@ public class Recipe {
 		this.prepTime = prepTime;
 	}
 	
+	public String toString() {
+		return " " ;
+	}
+	
 	
 
 	
