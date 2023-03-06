@@ -18,16 +18,17 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
  */
 public class Recipe {
 	
-	String title;
-	List<String> Tags;
-	String prepTime;
-	String cookTime;
+	private String title;
+	private List<String> Tags;
+	private String prepTime;
+	private String cookTime;
 	double servings;
 	double calories;
 	double fat; 
 	double carbs;
 	double protein;
 	Map<String, Double> Ingredients;
+	List<String> units;
 	
 	List <String> Directions ;
 	
@@ -44,12 +45,13 @@ public class Recipe {
 		this.carbs = 0.0;
 		this.protein = 0.0;
 		this.Directions = null;
+		this.units = null;
 	}
 	
 	
 	
 	public Recipe (String title, List<String> Tags, String prepTime, String cookTime, 
-			double servings, Map<String,Double> Ingredients, double calories, double fat, 
+			double servings, Map<String,Double> Ingredients, List<String>units,double calories, double fat, 
 			double carbs, double protein, List<String> Directions) {
 		this.title = title; 
 		this.Tags = Tags;
@@ -57,6 +59,7 @@ public class Recipe {
 		this.cookTime = cookTime;
 		this.servings = servings;
 		this.Ingredients = Ingredients;
+		this.units = units;
 		this.calories = calories;
 		this.fat = fat;
 		this.carbs = carbs;
@@ -74,6 +77,9 @@ public class Recipe {
 		
 		
 		this.Ingredients = map; 
+	}
+	public void setUnits (List<String> units) {
+		this.units = units;
 	}
 	
 	public void setDirections(List<String> directions) {
@@ -117,8 +123,10 @@ public class Recipe {
 	}
 	
 	public String toString() {
-		return String.format("%s\nCook Time: %-5s \nServings: %-5s\nCaloreis: %.3f\n", this.title, this.cookTime, this.servings,
-				this.calories
+		return String.format("%s\nPrep Time: %-5sCook Time: %-5s \nServings: %-5s\nCaloreis: %.1f"
+				+ "\nFat: %.1f\nCarbs: %.1f\nProtein: %.1f\nTags: %s\nDirections:\n%s\nIngredients: %s\nUnits: %s",
+				this.title, this.prepTime, this.cookTime,this.servings,
+				this.calories, this.fat,this.carbs,this.protein,this.Tags, this.Directions, this.Ingredients, this.units
 				) ;
 	}
 	

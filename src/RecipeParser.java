@@ -1,4 +1,5 @@
 import java.util.List;
+import java.util.Map;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -6,6 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Scanner;
 import java.io.BufferedReader;
 
@@ -31,7 +33,9 @@ public class RecipeParser {
 			while (in.hasNext()) {
 
 				List<String> tags = new ArrayList<String>();
-
+				Map<String,Double> ingredients = new HashMap<String,Double>();
+				List<String> units = new ArrayList<String>();
+				List<String> directions = new ArrayList<String>();
 				String[] values = in.nextLine().split("\t");
 
 				String title = values[0];
@@ -40,24 +44,45 @@ public class RecipeParser {
 				String cookTime = values[3];
 				double servings = Double.parseDouble(values[4]);
 				double calories = Double.parseDouble(values[5]);
+				double fat = Double.parseDouble(values[6]);
+				double carbs = Double.parseDouble(values[7]);
+				double protein = Double.parseDouble(values[8]);
 				
 
-				// 
-				///for (int i = 3; i < values.length; i++) {
-
-					//nutritionValues.add(Float.parseFloat(values[i]));
-
-					// System.out.printf("Numbers = %.3f\n", nutritionValues.get(i-2));
-
-				//}
-				recipe.setTitle(title); 
+			
+				recipe.setTitle(title);
+				recipe.setPrepTime(prepTime);
 				recipe.setCookTime(cookTime);
 				recipe.setServing(servings);
 				recipe.setCalories(calories);
+				recipe.setFat(fat);
+				recipe.setCarbs(carbs);
+				recipe.setProtein(protein);
 				
-				//.add(new Recipe(title, Tags, prepTime, cookTime, servings, ingredients, caloreis, fat, carbs, protein, directions));
-
-			}
+				for (int i = 9; i <= 20; i++) {
+					if (!values[i].equalsIgnoreCase("none")) {
+						
+					tags.add(values[i]); 
+					}
+				}
+				recipe.setTag(tags);
+				for(int i = 21; i<= 28; i++) {
+					if (values[i].equalsIgnoreCase("none")){
+						break;
+					}else {
+						directions.add(values[i]);
+					}
+				}
+				recipe.setDirections(directions);
+				
+				for(int i = 29;i + 2 < values.length;i+=3) {
+					ingredients.put(values[i],Double.parseDouble(values[i+1]));
+					units.add(values[i+2]);
+				}
+				recipe.setIngredients(ingredients);
+				recipe.setUnits(units);
+				}
+			
 
 			in.close();
 
