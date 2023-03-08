@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.List;
 import java.util.Scanner;
 
 import org.jsoup.Jsoup;
@@ -16,7 +17,7 @@ public class main {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		File f = new File("Recipe.txt");
-		Recipe recipe = RecipeParser.recipeReader(f);
+		List<Recipe> recipe = RecipeParser.recipeReader(f);
 		
 		
 
