@@ -94,7 +94,7 @@ public class RecipeSelector {
 
 	}
 	/**
-	* @author camsona_url - Desc: Takes entrees, sides, and dessert lists and prints them
+	* @author camsona_url - Desc: Takes entrees, sides, and dessert lists and prints them to their respective files
 	*/
 	public static void shutdown() {
 		PrintWriter pw = null;
