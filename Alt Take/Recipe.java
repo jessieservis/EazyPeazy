@@ -157,7 +157,9 @@ public class Recipe {
 				this.title, this.prepTime, this.cookTime, this.servings, this.calories, this.fat, this.carbs,
 				this.protein, tempTagList, this.Directions, tempIngMap, tempUnitList);
 	}
-
+	/**
+	* @author camsona_url Returns a string formatted for printing recipes to file
+	/
 	public String print() {
 		// Having a loop in a print method is a necessary evil unless we want to have a
 		// string in here dedicated to holding the big directions string
