@@ -159,7 +159,7 @@ public class Recipe {
 	}
 	/**
 	* @author camsona_url Returns a string formatted for printing recipes to file
-	/
+	*/
 	public String print() {
 		// Having a loop in a print method is a necessary evil unless we want to have a
 		// string in here dedicated to holding the big directions string
