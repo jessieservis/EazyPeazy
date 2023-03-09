@@ -19,7 +19,9 @@ public class main {
 		File f = new File("Recipe.txt");
 		List<Recipe> recipe = RecipeParser.recipeReader(f);
 		
+		RecipeSelector rs = new RecipeSelector();
 		
+		System.out.println(rs.desserts);
 
 		System.out.println(recipe.toString());
 	}
