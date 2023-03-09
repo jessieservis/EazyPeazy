@@ -13,7 +13,8 @@ import java.io.BufferedReader;
 
 /**
  * 
- * @author sethm DESCRIPTION: takes information from recipe.txt and returns recipe object
+ * @author sethm DESCRIPTION: takes information from recipe.txt and returns
+ *         recipe object
  */
 public class RecipeParser {
 
@@ -24,9 +25,9 @@ public class RecipeParser {
 		try (Scanner in = new Scanner(new FileReader(f))) {
 
 			String currentLine = in.nextLine();
-			//String[] headers = currentLine.split("\t");
+			// String[] headers = currentLine.split("\t");
 
-			// takes info from .txt file and sets them to the appropriate variables 
+			// takes info from .txt file and sets them to the appropriate variables
 			while (in.hasNext()) {
 
 				List<String> tags = new ArrayList<String>();
@@ -55,23 +56,22 @@ public class RecipeParser {
 				recipe.setCarbs(carbs);
 				recipe.setProtein(protein);
 
-				for (int i = 9; i <= 20; i++) {
-					if (!values[i].equalsIgnoreCase("none")) {
+				for (int i = 9; i < 20; i++) {
+					tags.add(values[i]);
 
-						tags.add(values[i]);
-					}
 				}
 				recipe.setTag(tags);
-				for (int i = 21; i <= 28; i++) {
-					if (values[i].equalsIgnoreCase("none")) {
-						break;
-					} else {
-						directions.add(values[i]);
-					}
+
+				//Splitting of the directions string and adding to list
+				String[] values2 = values[20].split("&");
+
+				for (int i = 0; i < values2.length; i++) {
+					directions.add(values2[i]);
 				}
+
 				recipe.setDirections(directions);
 
-				for (int i = 29; i + 2 < values.length; i += 3) {
+				for (int i = 26; i + 1 < values.length; i += 3) {
 					ingredients.put(values[i], Double.parseDouble(values[i + 1]));
 					units.add(values[i + 2]);
 				}
@@ -99,4 +99,5 @@ public class RecipeParser {
 		}
 		return recipeList;
 	}
+
 }
