@@ -7,9 +7,9 @@ import java.util.Random;
 
 public class RecipeSelector {
 	// Dont like declaring them with files in there already because of exceptions but just for testing
-	static List<Recipe> entrees = entreeSelector(new File("Entrees.txt"));
-	static List<Recipe> sides = sideSelector(new File("Sides.txt"));
-	static List<Recipe> desserts = dessertSelector(new File("Desserts.txt"));
+	static List<Recipe> entrees = entreeSelector(new File("Entree.txt"));
+	static List<Recipe> sides = sideSelector(new File("Side.txt"));
+	static List<Recipe> desserts = dessertSelector(new File("Dessert.txt"));
 
 // One big setup method called once vs 3 smaller methods all called once in file
 
@@ -94,7 +94,7 @@ public class RecipeSelector {
 	public static void shutdown() {
 		PrintWriter pw = null;
 
-		File f = new File("Entrees.txt");
+		File f = new File("Entree.txt");
 		try {
 			pw = new PrintWriter(f);
 
@@ -107,7 +107,7 @@ public class RecipeSelector {
 				pw.println(RecipeSelector.entrees.get(i).print());
 			}
 
-			f = new File("Sides.txt");
+			f = new File("Side.txt");
 			pw = new PrintWriter(f);
 
 			pw.println(
@@ -119,7 +119,7 @@ public class RecipeSelector {
 				pw.println(RecipeSelector.sides.get(i).print());
 			}
 
-			f = new File("Desserts.txt");
+			f = new File("Dessert.txt");
 			pw = new PrintWriter(f);
 
 			pw.println(
