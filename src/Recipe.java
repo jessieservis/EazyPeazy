@@ -19,7 +19,7 @@ public class Recipe {
 
 	private String title;
 	private String type;
-	private List<String> Tags = new ArrayList<String>();;
+	private List<String> Tags = new ArrayList<String>();
 	private String prepTime;
 	private String cookTime;
 	double servings;
@@ -105,6 +105,10 @@ public class Recipe {
 	public void setCalories(double calories) {
 		this.calories = calories;
 	}
+	
+	public double getCalories() {
+		return calories;
+	}
 
 	public void setFat(double fat) {
 		this.fat = fat;
@@ -125,9 +129,10 @@ public class Recipe {
 	public String getType() {
 		return this.type;
 	}
-
-	public String toString() {
-		// I am very much not a fan of having multiple loops and instantiations in a toString but this is
+	
+	//Printing fomatted and to show a user
+	public String print() {
+		// I am very much not a fan of having multiple loops and instantiations in a print statement but this is
 		// just making this work
 		// Something has to hold the data of the "none" sections, whether its a counter
 		// or a list
@@ -138,7 +143,7 @@ public class Recipe {
 			}
 		}
 
-		Map<String, Double> tempIngMap = Ingredients;
+		Map<String, Double> tempIngMap = new HashMap<String,Double>(Ingredients);
 		for (Map.Entry<String, Double> entry : tempIngMap.entrySet()) {
 			if (entry.getKey().equalsIgnoreCase("none") || entry.getValue() == 99) {
 				tempIngMap.remove(entry.getKey());
@@ -157,11 +162,10 @@ public class Recipe {
 				this.title, this.prepTime, this.cookTime, this.servings, this.calories, this.fat, this.carbs,
 				this.protein, tempTagList, this.Directions, tempIngMap, tempUnitList);
 	}
-	/**
-	* @author camsona_url Returns a string formatted for printing recipes to file
-	*/
-	public String print() {
-		// Having a loop in a print method is a necessary evil unless we want to have a
+
+	//Printing to file - camsona_url
+	public String toString() {
+		// Having a loop in a toString method is a necessary evil unless we want to have a
 		// string in here dedicated to holding the big directions string
 		List<String> keySet = new ArrayList<String>();
 		keySet.addAll(Ingredients.keySet());
@@ -170,6 +174,7 @@ public class Recipe {
 			temp += Directions.get(i) + "&";
 		}
 		temp += Directions.get(Directions.size() - 1);
+		
 		
 		return this.title + "\t" + this.type + "\t" + this.prepTime + "\t" + this.cookTime + "\t" + this.servings + "\t"
 				+ this.calories + "\t" + this.fat + "\t" + this.carbs + "\t" + this.protein + "\t" + this.Tags.get(0)
@@ -181,7 +186,7 @@ public class Recipe {
 				+ Ingredients.get(keySet.get(2)) + "\t" + units.get(2) + "\t" + keySet.get(3) + "\t"
 				+ Ingredients.get(keySet.get(3)) + "\t" + units.get(3) + "\t" + keySet.get(4) + "\t"
 				+ Ingredients.get(keySet.get(4)) + "\t" + units.get(4) + "\t" + keySet.get(5) + "\t"
-				+ Ingredients.get(keySet.get(5)) + "\t" + units.get(5);
+						+ Ingredients.get(keySet.get(5)) + "\t" + units.get(5);
 	}
 
 }
