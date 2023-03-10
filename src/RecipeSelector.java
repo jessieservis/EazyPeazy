@@ -6,10 +6,15 @@ import java.util.List;
 import java.util.Random;
 
 public class RecipeSelector {
+//	static List<Recipe> entrees = new ArrayList<>();
+//	static List<Recipe> sides = new ArrayList<>();
+//	static List<Recipe> desserts = new ArrayList<>();
+
+	
 	// Dont like declaring them with files in there already because of exceptions but just for testing
-	static List<Recipe> entrees = entreeSelector(new File("Entree.txt"));
-	static List<Recipe> sides = sideSelector(new File("Side.txt"));
-	static List<Recipe> desserts = dessertSelector(new File("Dessert.txt"));
+	static List<Recipe> entrees = entreeSelector(new File("Entrees.txt"));
+	static List<Recipe> sides = sideSelector(new File("Sides.txt"));
+	static List<Recipe> desserts = dessertSelector(new File("Desserts.txt"));
 
 // One big setup method called once vs 3 smaller methods all called once in file
 
@@ -71,8 +76,8 @@ public class RecipeSelector {
 		return desserts;
 	}
 
-	public List<Recipe> randomSelector() {
-		List<Recipe> meal = new ArrayList<>();
+	public Meal randomSelector() {
+		Meal meal = null;
 		if (!entrees.isEmpty() && !sides.isEmpty() && !desserts.isEmpty()) {
 			Random rand = new Random();
 
@@ -80,21 +85,17 @@ public class RecipeSelector {
 			Recipe randomSide = sides.get(rand.nextInt(sides.size()));
 			Recipe randomDessert = desserts.get(rand.nextInt(desserts.size()));
 
-			meal.add(randomEntree);
-			meal.add(randomSide);
-			meal.add(randomDessert);
+			meal = new Meal(randomEntree, randomSide, randomDessert);
 		}
 
 		return meal;
 
 	}
-	/**
-	* @author camsona_url - Desc: Takes entrees, sides, and dessert lists and prints them to their respective files
-	*/
+
 	public static void shutdown() {
 		PrintWriter pw = null;
 
-		File f = new File("Entree.txt");
+		File f = new File("Entrees.txt");
 		try {
 			pw = new PrintWriter(f);
 
@@ -104,10 +105,11 @@ public class RecipeSelector {
 							+ "ingredient1	amount1	unit1	ingredient2	amount2	unit2	ingredient3	amount3	unit3	ingredient4	amount4	unit4	ingredient5	amount5	unit5	ingredient6	amount6");
 
 			for (int i = 0; i < RecipeSelector.entrees.size(); i++) {
-				pw.println(RecipeSelector.entrees.get(i).print());
+				pw.println(RecipeSelector.entrees.get(i));
 			}
 
-			f = new File("Side.txt");
+			pw.close();
+			f = new File("Sides.txt");
 			pw = new PrintWriter(f);
 
 			pw.println(
@@ -116,10 +118,11 @@ public class RecipeSelector {
 							+ "ingredient1	amount1	unit1	ingredient2	amount2	unit2	ingredient3	amount3	unit3	ingredient4	amount4	unit4	ingredient5	amount5	unit5	ingredient6	amount6");
 
 			for (int i = 0; i < RecipeSelector.sides.size(); i++) {
-				pw.println(RecipeSelector.sides.get(i).print());
+				pw.println(RecipeSelector.sides.get(i));
 			}
-
-			f = new File("Dessert.txt");
+			
+			pw.close();
+			f = new File("Desserts.txt");
 			pw = new PrintWriter(f);
 
 			pw.println(
@@ -127,8 +130,10 @@ public class RecipeSelector {
 							+ "tag4	tag5	tag6	tag7	tag8	tag9	tag10	tag11	steps	"
 							+ "ingredient1	amount1	unit1	ingredient2	amount2	unit2	ingredient3	amount3	unit3	ingredient4	amount4	unit4	ingredient5	amount5	unit5	ingredient6	amount6");
 
+			
+			
 			for (int i = 0; i < RecipeSelector.desserts.size(); i++) {
-				pw.println(RecipeSelector.desserts.get(i).print());
+				pw.println(RecipeSelector.desserts.get(i));
 			}
 
 		} catch (FileNotFoundException fnf) {
