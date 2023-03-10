@@ -21,9 +21,9 @@ public class main {
 		
 		RecipeSelector rs = new RecipeSelector();
 		
-		System.out.println(rs.desserts);
-
-		System.out.println(recipe.toString());
+		System.out.println(rs.desserts.get(0).print());
+		
+		rs.shutdown();
 	}
 
 
