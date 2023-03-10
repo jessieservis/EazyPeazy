@@ -71,10 +71,11 @@ public class RecipeParser {
 
 				recipe.setDirections(directions);
 
-				for (int i = 26; i + 1 < values.length; i += 3) {
+				for (int i = 21; i + 1 < values.length + 1; i += 3) {
 					ingredients.put(values[i], Double.parseDouble(values[i + 1]));
 					units.add(values[i + 2]);
 				}
+				
 				recipe.setIngredients(ingredients);
 				recipe.setUnits(units);
 				recipeList.add(recipe);
