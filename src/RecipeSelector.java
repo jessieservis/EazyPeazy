@@ -12,9 +12,9 @@ public class RecipeSelector {
 
 	
 	// Dont like declaring them with files in there already because of exceptions but just for testing
-	static List<Recipe> entrees = entreeSelector(new File("Entrees.txt"));
-	static List<Recipe> sides = sideSelector(new File("Sides.txt"));
-	static List<Recipe> desserts = dessertSelector(new File("Desserts.txt"));
+	static List<Recipe> entrees = entreeSelector(new File("Entree.txt"));
+	static List<Recipe> sides = sideSelector(new File("Side.txt"));
+	static List<Recipe> desserts = dessertSelector(new File("Dessert.txt"));
 
 // One big setup method called once vs 3 smaller methods all called once in file
 
