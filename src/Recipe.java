@@ -122,7 +122,7 @@ public class Recipe {
 	public String getType() {
 		return this.type;
 	}
-
+	//this is nothing
 	public String toString() {
 		return String.format("%s\nPrep Time: %-5sCook Time: %-5s \nServings: %-5s\nCaloreis: %.1f"
 				+ "\nFat: %.1f\nCarbs: %.1f\nProtein: %.1f\nTags: %s\nDirections:\n%s\nIngredients: %s\nUnits: %s",
