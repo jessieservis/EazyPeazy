@@ -70,6 +70,10 @@ public class Recipe {
 		this.prepTime = prepTime;
 	}
 	
+	public List<String> getTags(){
+		return tag;
+	}
+	
 	public String toString() {
 		return " " ;
 	}
