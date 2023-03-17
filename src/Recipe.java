@@ -86,7 +86,7 @@ public class Recipe {
 		this.Directions = directions;
 	}
 
-	public void setTag(List<String> tag) {
+	public void setTags(List<String> tag) {
 		this.Tags = tag;
 	}
 
@@ -128,6 +128,10 @@ public class Recipe {
 
 	public String getType() {
 		return this.type;
+	}
+	//I (jessie) added this method
+	public List<String> getTags(){
+		return Tags;
 	}
 
 	//Printing fomatted and to show a user
