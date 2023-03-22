@@ -6,12 +6,8 @@ import java.util.List;
 import java.util.Random;
 
 public class RecipeSelector {
-//	static List<Recipe> entrees = new ArrayList<>();
-//	static List<Recipe> sides = new ArrayList<>();
-//	static List<Recipe> desserts = new ArrayList<>();
 
-	
-	// Dont like declaring them with files in there already because of exceptions but just for testing
+	// Exceptions are already taken care of in the Recipe Parser
 	static List<Recipe> entrees = entreeSelector(new File("Entree.txt"));
 	static List<Recipe> sides = sideSelector(new File("Side.txt"));
 	static List<Recipe> desserts = dessertSelector(new File("Dessert.txt"));
