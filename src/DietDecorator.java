@@ -36,5 +36,13 @@ public class DietDecorator extends RecipeSelector {
 }
 
 class VeganDecorator extends DietDecorator{
-	
+	public static List<Recipe> entreeSelector(File f) {
+		return DietDecorator.entreeSelector(f, "vegan");
+	}
+	public static List<Recipe> sideSelector(File f) {
+		return DietDecorator.sideSelector(f, "vegan");
+	}
+	public static List<Recipe> dessertSelector(File f) {
+		return DietDecorator.dessertSelector(f, "vegan");
+	}
 }
