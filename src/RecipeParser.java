@@ -60,7 +60,7 @@ public class RecipeParser {
 					tags.add(values[i]);
 
 				}
-				recipe.setTag(tags);
+				recipe.setTags(tags);
 
 				//Splitting of the directions string and adding to list
 				String[] values2 = values[20].split("&");
