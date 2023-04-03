@@ -18,6 +18,8 @@ public class main {
 		Scanner sc = new Scanner(System.in);
 		File f = new File("Recipe.txt");
 		List<Recipe> recipe = RecipeParser.recipeReader(f);
+	//	List<Recipe> entrees = veganEntrees(f);
+		
 		
 		RecipeSelector rs = new RecipeSelector();
 		
