@@ -39,10 +39,10 @@ class VeganDecorator extends DietDecorator{
 	public static List<Recipe> VeganEntree(File f) {
 		return DietDecorator.entreeSelector(f, "vegan");
 	}
-	public static List<Recipe> sideSelector(File f) {
+	public static List<Recipe> VeganSideSelector(File f) {
 		return DietDecorator.sideSelector(f, "vegan");
 	}
-	public static List<Recipe> dessertSelector(File f) {
+	public static List<Recipe> VeganDessertSelector(File f) {
 		return DietDecorator.dessertSelector(f, "vegan");
 	}
 }

@@ -18,13 +18,11 @@ public class main {
 		Scanner sc = new Scanner(System.in);
 		File f = new File("Recipe.txt");
 		List<Recipe> recipe = RecipeParser.recipeReader(f);
-	//	List<Recipe> entrees = veganEntrees(f);
-		
 		
 		RecipeSelector rs = new RecipeSelector();
-		
+		//RecipeSelector vs = new VeganDecorator();
 		System.out.println(rs.desserts.get(0).print());
-		
+		//System.out.println(vs.VeganDessertSelector(f).get(0).print());
 		rs.shutdown();
 	}
 
