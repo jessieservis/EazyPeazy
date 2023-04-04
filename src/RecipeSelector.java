@@ -91,6 +91,8 @@ public class RecipeSelector {
 	public static void shutdown() {
 		PrintWriter pw = null;
 
+		//Formatting - Up to directions is separated by \t, Directions are separated by &, Ingredients are separatedby & and then by , into their specific values 
+		
 		File f = new File("Entree.txt");
 		try {
 			pw = new PrintWriter(f);
