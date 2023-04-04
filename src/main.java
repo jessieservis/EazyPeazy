@@ -166,4 +166,5 @@ public class main {
 		} catch (InputMismatchException ime) {
 			ime.printStackTrace();
 		}
+	}
 }
