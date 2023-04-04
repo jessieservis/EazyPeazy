@@ -147,50 +147,49 @@ public class Recipe {
 			}
 		}
 
-		Map<String, Double> tempIngMap = new HashMap<String,Double>(Ingredients);
-		for (Map.Entry<String, Double> entry : tempIngMap.entrySet()) {
-			if (entry.getKey().equalsIgnoreCase("none") || entry.getValue() == 99) {
-				tempIngMap.remove(entry.getKey());
-			}
-		}
-
-			List<String> tempUnitList = new ArrayList<String>();
-			for (int i = 0; i < units.size(); i++) {
-				if (!units.get(i).equalsIgnoreCase("none")) {
-					tempUnitList.add(units.get(i));
-				}
-			}
+		
 		
 		return String.format("%s\nPrep Time: %-5sCook Time: %-5s \nServings: %-5s\nCalories: %.1f"
 				+ "\nFat: %.1f\nCarbs: %.1f\nProtein: %.1f\nTags: %s\nDirections:\n%s\nIngredients: %s\nUnits: %s",
 				this.title, this.prepTime, this.cookTime, this.servings, this.calories, this.fat, this.carbs,
-				this.protein, tempTagList, this.Directions, tempIngMap, tempUnitList);
+				this.protein, tempTagList, this.Directions, this.Ingredients, this.units);
 	}
 
 	//Printing to file - camsona_url
 	public String toString() {
-		// Having a loop in a toString method is a necessary evil unless we want to have a
-		// string in here dedicated to holding the big directions string
-		List<String> keySet = new ArrayList<String>();
-		keySet.addAll(Ingredients.keySet());
+		// Having two loops in a toString method is a necessary evil unless we want to have a
+		// string in here dedicated to holding the big directions string and big Ingredients string
 		String temp = "";
-		for (int i = 0; i < Directions.size() - 1; i++) {
-			temp += Directions.get(i) + "&";
+		int j = 0;
+		// Iterate through map, int j holds an index so units can also be iterated through
+		Iterator <Map.Entry<String,Double>> iter = Ingredients.entrySet().iterator();
+		while(iter.hasNext()) {
+			Map.Entry<String,Double> entry = iter.next();
+			temp += entry.getKey() + "," + entry.getValue() + "," + units.get(j);
+			// Check to see if the ingredient is the last one, if so then an & is not needed
+			if(j == Ingredients.size() - 1) {	
+				break;
+			} else {
+				temp += "&";
+			}
+			
+			j++;
 		}
-		temp += Directions.get(Directions.size() - 1);
-		
+
+		String temp2 = "";
+		// Iterates up to right before the last direction
+		for (int i = 0; i < Directions.size() - 1; i++) {
+			temp2 += Directions.get(i) + "&";
+		}
+		// Adds the last direction
+		temp2 += Directions.get(Directions.size() - 1);
 		
 		return this.title + "\t" + this.type + "\t" + this.prepTime + "\t" + this.cookTime + "\t" + this.servings + "\t"
 				+ this.calories + "\t" + this.fat + "\t" + this.carbs + "\t" + this.protein + "\t" + this.Tags.get(0)
 				+ "\t" + this.Tags.get(1) + "\t" + this.Tags.get(2) + "\t" + this.Tags.get(3) + "\t" + this.Tags.get(4)
 				+ "\t" + this.Tags.get(5) + "\t" + this.Tags.get(6) + "\t" + this.Tags.get(7) + "\t" + this.Tags.get(8)
-				+ "\t" + this.Tags.get(9) + "\t" + this.Tags.get(10) + "\t" + temp + "\t" + keySet.get(0) + "\t"
-				+ Ingredients.get(keySet.get(0)) + "\t" + units.get(0) + "\t" + keySet.get(1) + "\t"
-				+ Ingredients.get(keySet.get(1)) + "\t" + units.get(1) + "\t" + keySet.get(2) + "\t"
-				+ Ingredients.get(keySet.get(2)) + "\t" + units.get(2) + "\t" + keySet.get(3) + "\t"
-				+ Ingredients.get(keySet.get(3)) + "\t" + units.get(3) + "\t" + keySet.get(4) + "\t"
-				+ Ingredients.get(keySet.get(4)) + "\t" + units.get(4) + "\t" + keySet.get(5) + "\t"
-						+ Ingredients.get(keySet.get(5)) + "\t" + units.get(5);
+				+ "\t" + this.Tags.get(9) + "\t" + this.Tags.get(10) + "\t" + temp2 + "\t" + temp;
 	}
+
 
 }
