@@ -29,6 +29,8 @@ public class main {
 		rs.shutdown();
 	}
 
+	
+	// camsona - Basic recipe creator for us to use to get recipes in easier
 	public static void createRecipe() {
 		// Declaring values so java doesnt get mad later
 		String title = "";
