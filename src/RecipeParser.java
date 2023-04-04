@@ -21,7 +21,6 @@ public class RecipeParser {
 	public static List<Recipe> recipeReader(File f) {
 
 		List<Recipe> recipeList = new ArrayList<>();
-		Recipe recipe = new Recipe();
 		try (Scanner in = new Scanner(new FileReader(f))) {
 
 			String currentLine = in.nextLine();
@@ -29,7 +28,8 @@ public class RecipeParser {
 
 			// takes info from .txt file and sets them to the appropriate variables
 			while (in.hasNext()) {
-
+				Recipe recipe = new Recipe();
+				
 				List<String> tags = new ArrayList<String>();
 				Map<String, Double> ingredients = new HashMap<String, Double>();
 				List<String> units = new ArrayList<String>();
@@ -71,9 +71,15 @@ public class RecipeParser {
 
 				recipe.setDirections(directions);
 
-				for (int i = 21; i + 1 < values.length + 1; i += 3) {
-					ingredients.put(values[i], Double.parseDouble(values[i + 1]));
-					units.add(values[i + 2]);
+				// Array that holds each ingredient in their own string
+				String [] values3 = values[21].split("&");
+				
+				
+				// Splitting that string into the separate values
+				for(int i = 0; i < values3.length; i++) {
+					String [] values4 = values3[i].split(",");
+					ingredients.put(values4[0], Double.parseDouble(values4[1]));
+					units.add(values4[2]);
 				}
 				
 				recipe.setIngredients(ingredients);
