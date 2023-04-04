@@ -91,41 +91,38 @@ public class RecipeSelector {
 	public static void shutdown() {
 		PrintWriter pw = null;
 
-		File f = new File("Entrees.txt");
+		File f = new File("Entree.txt");
 		try {
 			pw = new PrintWriter(f);
 
 			pw.println(
 					"title	type	Prep_time	Cook_time	Servings	Calories	Fat	Carbs	Protein	tag1	tag2	tag3	"
 							+ "tag4	tag5	tag6	tag7	tag8	tag9	tag10	tag11	steps	"
-							+ "ingredient1	amount1	unit1	ingredient2	amount2	unit2	ingredient3	amount3	unit3	ingredient4	amount4	unit4	ingredient5	amount5	unit5	ingredient6	amount6");
-
+							+ "ingredients	amounts	units");
 			for (int i = 0; i < RecipeSelector.entrees.size(); i++) {
 				pw.println(RecipeSelector.entrees.get(i));
 			}
 
 			pw.close();
-			f = new File("Sides.txt");
+			f = new File("Side.txt");
 			pw = new PrintWriter(f);
 
 			pw.println(
 					"title	type	Prep_time	Cook_time	Servings	Calories	Fat	Carbs	Protein	tag1	tag2	tag3	"
 							+ "tag4	tag5	tag6	tag7	tag8	tag9	tag10	tag11	steps	"
-							+ "ingredient1	amount1	unit1	ingredient2	amount2	unit2	ingredient3	amount3	unit3	ingredient4	amount4	unit4	ingredient5	amount5	unit5	ingredient6	amount6");
-
+							+ "ingredients	amounts	units");
 			for (int i = 0; i < RecipeSelector.sides.size(); i++) {
 				pw.println(RecipeSelector.sides.get(i));
 			}
 			
 			pw.close();
-			f = new File("Desserts.txt");
+			f = new File("Dessert.txt");
 			pw = new PrintWriter(f);
 
 			pw.println(
 					"title	type	Prep_time	Cook_time	Servings	Calories	Fat	Carbs	Protein	tag1	tag2	tag3	"
 							+ "tag4	tag5	tag6	tag7	tag8	tag9	tag10	tag11	steps	"
-							+ "ingredient1	amount1	unit1	ingredient2	amount2	unit2	ingredient3	amount3	unit3	ingredient4	amount4	unit4	ingredient5	amount5	unit5	ingredient6	amount6");
-
+							+ "ingredients	amounts	units");
 			
 			
 			for (int i = 0; i < RecipeSelector.desserts.size(); i++) {
