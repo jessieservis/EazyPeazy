@@ -12,23 +12,40 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 public class main {
+	public static List<Recipe> entrees;
+	public static List<Recipe> sides;
+	public static List<Recipe> desserts;
+	public static String tag;
 
 	public static void main(String[] args) {
+		// we can change this, but the top is how we could initialize the lists before
+		// any tags, and the else would be when we have a tag!
+		if (tag == null) {
+			entrees = RecipeSelector.entreeSelector(new File("Entree.txt"));
+			sides = RecipeSelector.sideSelector(new File("Side.txt"));
+			desserts = RecipeSelector.dessertSelector(new File("Dessert.txt"));
+		} else {
+			entrees = DietDecorator.entreeSelector(new File("Entree.txt"), tag);
+			sides = DietDecorator.sideSelector(new File("Side.txt"), tag);
+			desserts = DietDecorator.dessertSelector(new File("Dessert.txt"), tag);
+		}
+
 		Scanner sc = new Scanner(System.in);
 		File f = new File("Recipe.txt");
 		List<Recipe> recipe = RecipeParser.recipeReader(f);
-		
-		RecipeSelector rs = new RecipeSelector();
-		//RecipeSelector vs = new VeganDecorator();
-		System.out.println(rs.desserts.get(0).print());
-		//System.out.println(vs.VeganDessertSelector(f).get(0).print());
-		
-		createRecipe();
-		
-		rs.shutdown();
+
+		System.out.println("Do you want to create a recipe? (Yes/No)");
+		if (sc.next().equalsIgnoreCase("Yes"))
+			createRecipe();
+
+		// RecipeSelector rs = new RecipeSelector();
+		// RecipeSelector vs = new VeganDecorator();
+		// System.out.println(rs.desserts.get(0).print());
+		System.out.println(entrees.get(0).print());
+
+		// rs.shutdown();
 	}
 
-	
 	// camsona - Basic recipe creator for us to use to get recipes in easier
 	public static void createRecipe() {
 		// Declaring values so java doesnt get mad later
@@ -45,7 +62,7 @@ public class main {
 		Map<String, Double> Ingredients = new HashMap<String, Double>();
 		List<String> units = new ArrayList<String>();
 		List<String> Directions = new ArrayList<String>();
-
+//.
 		Scanner sc = null;
 		try {
 			sc = new Scanner(System.in);
@@ -54,7 +71,7 @@ public class main {
 			System.out.print("Step 1: What is the name of the recipe: ");
 			title = sc.nextLine();
 
-			System.out.print("\nStep 2: What type of meal the recipe is (Entree, Side, Dessert): ");
+			System.out.print("\nStep 2: What type of recipe is it (Entree, Side, Dessert)?: ");
 			type = sc.next();
 
 			System.out.println(
@@ -63,7 +80,7 @@ public class main {
 				System.out.print("Tag " + i + ": ");
 				String temp = sc.next();
 				if (temp.equalsIgnoreCase("s")) {
-					for(int j = 0; j < 12 - i; j++) {
+					for (int j = 0; j < 12 - i; j++) {
 						Tags.add("none");
 					}
 					break;
@@ -71,10 +88,10 @@ public class main {
 				Tags.add(temp);
 			}
 
-			System.out.print("\nStep 4: How long it takes to prepare the ingredients for the recipe: ");
+			System.out.print("\nStep 4: How long does it take to prepare the ingredients for the recipe: ");
 			prepTime = sc.next();
 
-			System.out.print("\nStep 5: How long it takes to cook the recipe: ");
+			System.out.print("\nStep 5: How long does it take to cook the recipe: ");
 			cookTime = sc.next();
 
 			System.out.print("\nStep 6: How many servings does the recipe make? ");
@@ -94,9 +111,9 @@ public class main {
 
 			// We should have more than 6 ingredients, especially since they're at the end
 			System.out.print("\nStep 8: Ingredients, when you wish to stop please enter S ");
-			//Short for continue
+			// Short for continue
 			boolean contin = true;
-			
+
 			for (int i = 1; i < 99; i++) {
 				boolean repeat = true;
 				String name = "";
@@ -109,15 +126,16 @@ public class main {
 					name = sc.nextLine();
 					name = sc.nextLine();
 					if (name.equalsIgnoreCase("s")) {
-						// If the user wants to stop, ends this loop and then shortly after ends the second one
+						// If the user wants to stop, ends this loop and then shortly after ends the
+						// second one
 						contin = false;
 						break;
 					}
-					
+
 					System.out.print("Units of measurement: ");
 					unit = sc.next();
 
-					System.out.print("How many " + unit + " are used in the recipe? ");
+					System.out.print("How many " + unit + "(s) are used in the recipe? (decimals only)");
 					num = sc.nextDouble();
 
 					System.out.print("\nDoes the ingredient look right? Y / N: ");
@@ -125,10 +143,10 @@ public class main {
 						repeat = false;
 					}
 				}
-				if(!contin) {
+				if (!contin) {
 					break;
 				}
-					
+
 				Ingredients.put(name, num);
 				units.add(unit);
 			}
@@ -145,23 +163,21 @@ public class main {
 				}
 			}
 
-
-
 			Recipe temp = new Recipe(title, type, Tags, prepTime, cookTime, servings, Ingredients, units, calories, fat,
 					carbs, protein, Directions);
 
 			System.out.println(temp);
 
 			if (type.equals("Entree")) {
-				RecipeSelector.entrees.add(temp);
+				entrees.add(temp);
 			} else if (type.equals("Side")) {
-				RecipeSelector.sides.add(temp);
+				sides.add(temp);
 			} else if (type.equals("Dessert")) {
-				RecipeSelector.desserts.add(temp);
+				desserts.add(temp);
 			}
 
 			System.out.println("Your recipe has been created!");
-			
+
 		} catch (InputMismatchException ime) {
 			ime.printStackTrace();
 		}
